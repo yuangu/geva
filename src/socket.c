@@ -18,27 +18,27 @@ int socket_create(int protocol,char* ip, unsigned short port){
 	addr.sin_addr.s_addr = inet_addr( ip );
  else
 	addr.sin_addr.s_addr = INADDR_ANY;
- 
+
  addr.sin_port = htons( port );
 
  if(protocol)   //udp
 	fd=socket(AF_INET,SOCK_DGRAM,0);
  else //tcp
-	fd=socket(AF_INET,SOCK_STREAM,0); 
+	fd=socket(AF_INET,SOCK_STREAM,0);
  if(fd==-1){
 #ifdef WIN32
 	 WSACleanup();
 #endif
-       	log_message("socket create failed;");
+ //      	log_message("socket create failed;");
  	return fd;
  }
  int port1=port;
 while( bind( fd, (struct sockaddr*)&addr, sizeof(struct sockaddr_in) ) < 0)
  {
 	  addr.sin_port = htons( ++port1 );
-	 
+
  }
-log_message("socket(id:%d) created  and binded : %s:%d ;",fd,inet_ntoa(addr.sin_addr),port);
+//log_message("socket(id:%d) created  and binded : %s:%d ;",fd,inet_ntoa(addr.sin_addr),port);
 
  return fd;
 }
@@ -51,8 +51,8 @@ void qqsocket_close( int fd )
 #else
 	close( fd );
 #endif
-log_message("colse the socket(id:%d)",fd);
-} 
+//log_message("colse the socket(id:%d)",fd);
+}
 
 //connect a socket to remote server
 int socket_connect(int fd,char* ip,unsigned short port)
@@ -66,12 +66,12 @@ int socket_connect(int fd,char* ip,unsigned short port)
 		if( host )
 		{
 			addr.sin_addr.s_addr = *(size_t*) host->h_addr_list[0];
-			
+
 		}else{
 			return -1;
 		}
 
-  	
+
 	}
        addr.sin_port = htons( port );
 	if( connect( fd, (struct sockaddr*)&addr, sizeof(struct sockaddr_in)) < 0 )

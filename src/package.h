@@ -11,4 +11,6 @@ evabyte* putevabyte(evabyte* inevabyte,const uchar* str,int len);
 evabyte* delevabyte(evabyte* inevabyte,int frist,int last);
 //将evabyte型转成uchar*,为了使功能更加强大，特加了一个frist,last的范围，当两值全为0//时就是将evabyte型全部转成uchar*
 uchar* getucharfromevabyte(evabyte* inevabyte,uchar* out,int first,int last);
+
+evabyte * encryptevabyte(const evabyte* inbyte,evabyte *outbyte,uchar* key);
 #endif
