@@ -1,5 +1,6 @@
 #include"libeva.h"
 #include "socket.h"
+#include "login.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -39,12 +40,21 @@ void eva_init(EVA *eva,ulong user,char* passwd,status sta){
     //for status
     ((eva->user)->sta)=sta;
 }
+int eva_login(EVA* eva){
 
+    LONDATA* logindata=eva_login_init();
+    eva_login_touch(eva,logindata);
+    return 1;
+}
 /*
 debug
 */
 int main(){
 EVA eva;
 eva_init(&eva,822705688,"123456",1);
+eva.net=eva_net_init(UDP,"0.0.0.0",4000,
+                      "219.133.49.171", 8000);
+
+eva_login(&eva);
 return 1;
 }
