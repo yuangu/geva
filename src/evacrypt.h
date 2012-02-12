@@ -1,4 +1,4 @@
-/**
+/*
  * The QQ2003C protocol plugin
  *
  * for gaim

@@ -29,12 +29,13 @@ evabyte* putevabyte(evabyte* inevabyte,const uchar* str,int len){
 evabyte* delevabyte(evabyte* inevabyte,int frist,int last){
 	if((inevabyte->len)==last) inevabyte->len=frist;
        	else
-	{	int f=frist,l=last,len=inevabyte->len;
-		inevabyte->len=f;
+	{	int f=frist,l=last;
+		inevabyte->len=0;
+		int i=0;
 		while(1){
-			inevabyte->data[f++]=inevabyte->data[l++];
-			inevabyte->len++;
-			if(l==len) break;
+		    *(inevabyte->data+(i++))=*(inevabyte->data+(f++));
+            inevabyte->len++;
+            if(f==l)break;
 		}
 
 	}
@@ -42,10 +43,9 @@ evabyte* delevabyte(evabyte* inevabyte,int frist,int last){
 
 }
 uchar* getucharfromevabyte(evabyte* inevabyte,uchar* out,int first,int last){
-	int i,f=first,l=last;
-	if(f==l&&f==0) l=inevabyte->len;
-	for(i=0;i<(l-f);i++)
-		out[i]=*(inevabyte->data+f+i);
+    int i;
+    for(i=0;i<(last-first);i++)
+		*(out+i)=*(((inevabyte->data)+first)+i);
 
 	return out;
 
@@ -57,31 +57,14 @@ evabyte * encryptevabyte(const evabyte* inbyte,evabyte *outbyte,uchar* key){
     return outbyte;
 
 }
-
-
-/*
- //debug
-int main()
-{
-	evabyte a;
-
-	a.data=(uchar*)malloc(10);
-	memset(a.data,0,sizeof(10));
-
-	a.len=0;
-
-	int b=822705688;
-	putevabyte(&a,(char*)&b,4);
-	uchar out;
-	 getucharfromevabyte(&a,&out,1,2);
-
-	//printf("%d\n",a.len);
-//	int i;
-//	for(i=0;i<2;i++)
-	printf("%X\n",out);
-
-	return 1;
-
-
+void  seqadd(uchar* seq){
+    if(*(seq+1)==0xFF){
+        *(seq+1)=0;
+        if(*seq==0xff)
+            *(seq)=0;
+        else *seq=*seq+1;
+    }else{
+        *(seq+1)=*(seq+1)+1;
+    }
 }
-*/
+

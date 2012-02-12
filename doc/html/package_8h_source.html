@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>libeva: D:/libeva/src/package.h源文件</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">libeva
+   &#160;<span id="projectnumber">1.0.0</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- 制作者 Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>首页</span></a></li>
+      <li><a href="annotated.html"><span>数据结构</span></a></li>
+      <li class="current"><a href="files.html"><span>文件</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="搜索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>文件列表</span></a></li>
+      <li><a href="globals.html"><span>全局定义</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">D:/libeva/src/package.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef _PACKAGE_H_</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define _PACKAGE_H_</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#include &quot;evadef.h&quot;</span>
+<a name="l00004"></a>00004 <span class="comment">//初使一个evabyte型</span>
+<a name="l00005"></a>00005 <a class="code" href="structevabyte.html">evabyte</a>* initevabyte(<a class="code" href="structevabyte.html">evabyte</a>* aevabyte,<span class="keywordtype">int</span> maxlen);
+<a name="l00006"></a>00006 <span class="comment">//释放evabyte内存</span>
+<a name="l00007"></a>00007 <span class="keywordtype">void</span> freeevabyte(<a class="code" href="structevabyte.html">evabyte</a> *aevabyte);
+<a name="l00008"></a>00008 <span class="comment">//把无符号数据填充到evabyte</span>
+<a name="l00009"></a>00009 <a class="code" href="structevabyte.html">evabyte</a>* putevabyte(<a class="code" href="structevabyte.html">evabyte</a>* inevabyte,<span class="keyword">const</span> uchar* str,<span class="keywordtype">int</span> len);
+<a name="l00010"></a>00010 <span class="comment">//删除frist到last的数据</span>
+<a name="l00011"></a>00011 <a class="code" href="structevabyte.html">evabyte</a>* delevabyte(<a class="code" href="structevabyte.html">evabyte</a>* inevabyte,<span class="keywordtype">int</span> frist,<span class="keywordtype">int</span> last);
+<a name="l00012"></a>00012 <span class="comment">//将evabyte型转成uchar*,为了使功能更加强大，特加了一个frist,last的范围，当两值全为0//时就是将evabyte型全部转成uchar*</span>
+<a name="l00013"></a>00013 uchar* getucharfromevabyte(<a class="code" href="structevabyte.html">evabyte</a>* inevabyte,uchar* out,<span class="keywordtype">int</span> first,<span class="keywordtype">int</span> last);
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <a class="code" href="structevabyte.html">evabyte</a> * encryptevabyte(<span class="keyword">const</span> <a class="code" href="structevabyte.html">evabyte</a>* inbyte,<a class="code" href="structevabyte.html">evabyte</a> *outbyte,uchar* key);
+<a name="l00016"></a>00016 <span class="keywordtype">void</span>  seqadd(uchar* seq);
+<a name="l00017"></a>00017 <span class="preprocessor">#endif</span>
+</pre></div></div><!-- contents -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>全部</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>数据结构</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>文件</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>函数</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>变量</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generated at 2012年二月12日 星期日 18:31:07 for libeva by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>

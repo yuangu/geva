@@ -13,4 +13,5 @@ evabyte* delevabyte(evabyte* inevabyte,int frist,int last);
 uchar* getucharfromevabyte(evabyte* inevabyte,uchar* out,int first,int last);
 
 evabyte * encryptevabyte(const evabyte* inbyte,evabyte *outbyte,uchar* key);
+void  seqadd(uchar* seq);
 #endif

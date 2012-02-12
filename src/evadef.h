@@ -38,6 +38,7 @@ typedef struct {
 	uchar id[4];
 	uchar passwd_md5_one[20];
 	uchar passwd_md5_two[16];
+	uchar nickname[100];
     	status sta;
 	uchar seesionkey[16];
 

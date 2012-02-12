@@ -1,5 +1,5 @@
 #include"libeva.h"
-#include "socket.h"
+#include "evasocket.h"
 #include "login.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,7 +14,7 @@ void eva_init(EVA *eva,ulong user,char* passwd,status sta){
 
 /*init eva of version data*/
     uint version=htons(EVA_VERSION);
-    memcpy((eva->user)->id,&version,2);
+    memcpy((eva->data)->version,&version,2);
     uchar gd[11]=EVA_GD;
     memcpy((eva->data)->gd,&gd,11);
     //seq is zero,so not init now
@@ -43,18 +43,24 @@ void eva_init(EVA *eva,ulong user,char* passwd,status sta){
 int eva_login(EVA* eva){
 
     LONDATA* logindata=eva_login_init();
-    eva_login_touch(eva,logindata);
-    return 1;
+    eva_login_touch_send(eva,logindata);
+    eva_login_touch_recv(eva,logindata);
+    eva_login_request_send(eva,logindata);
+    return 01;
 }
 /*
 debug
 */
+
 int main(){
 EVA eva;
 eva_init(&eva,822705688,"123456",1);
 eva.net=eva_net_init(UDP,"0.0.0.0",4000,
-                      "219.133.49.171", 8000);
-
+                      "sz3.tencent.com", 8000);
+                      printf("%d\n",(eva.net)->fd);
+if(eva.net==NULL)printf("出错了，net初使化！");
 eva_login(&eva);
+
 return 1;
 }
+
