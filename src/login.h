@@ -27,12 +27,10 @@ typedef struct EVAloindata{
     uchar EVA_LOGIN_E5_DATA02[123];
 }LONDATA;
 enum LOGIN_ERRO{
-    NET_ERRO=0,   ///网络错误
-    PASSWD_ERRO=-1, ///密码错误
-    ID_ERRO=-2,  ///没有该账号
     NO_ERRO=-3, ///不允许登录
-
-
+    ID_ERRO=-2,  ///没有该账号
+    PASSWD_ERRO=-1, ///密码错误
+    NET_ERRO=0,   ///网络错误
 };
 //LONDATA *logindata;
 LONDATA* eva_login_init();
@@ -41,4 +39,16 @@ int eva_login_touch_recv(EVA *eva,LONDATA* logindata);
 
 int eva_login_request_send(EVA *eva,LONDATA* logindata);
 int eva_login_request_recv(EVA *eva,LONDATA* logindata);
+
+int eva_login_verify_send(EVA *eva,LONDATA* logindata);
+int eva_login_verify_recv(EVA *eva,LONDATA* logindata);
+
+int eva_login_E5_send(EVA *eva,LONDATA* logindata);
+int eva_login_E5_recv(EVA *eva,LONDATA* logindata);
+
+int eva_login_E3_send(EVA *eva,LONDATA* logindata);
+int eva_login_E3_recv(EVA *eva,LONDATA* logindata);
+
+int eva_login_30_send(EVA *eva,LONDATA* logindata);
+int eva_login_30_recv(EVA *eva,LONDATA* logindata);
 #endif

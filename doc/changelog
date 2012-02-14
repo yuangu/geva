@@ -1,6 +1,11 @@
 #this file is log the change of libeva
-
-1. 2012-2-12 socket.c and socket.h change to evasocket.c and evasocket.h
+0. 2012-2-11 mice suggest that add this changelog
+	by<mice crtmike@gmail.com>
+1. 2012-2-12 socket.c and socket.h replaced by  evasocket.c and evasocket.h
 	by<yuangu lifulinghan@aol.com>
 2. 2012-2-12 eva login is over,but not debug
 	by<yuangu lifulinghan@aol.com>
+3. 2012-2-13 Encryption algorithm again wrote by yuangu(the old was written by gaim) 
+	by<yuangu lifulinghan@aol.com>
+4. 2012-2-14 修复login，已经可以登录了
+	by<yuangu lifulinghan@aol.com>    

@@ -34,6 +34,7 @@ int socket_create(int protocol,char* ip, unsigned short port)
 //      	log_message("socket create failed;");
         return fd;
     }
+
 // printf("%d",fd);
     int port1=port;
     int time=0;
@@ -43,6 +44,17 @@ int socket_create(int protocol,char* ip, unsigned short port)
         addr.sin_port = htons( ++port1 );
         if(time==20) return -1; //break;
 
+    }
+    //发送超时
+    int   TimeOut=15000;   //设置发送超时15秒
+    if(setsockopt(fd,SOL_SOCKET,SO_SNDTIMEO,(char*)&TimeOut,sizeof(TimeOut))==SOCKET_ERROR)
+    {
+    return   -1;
+    }
+    //接收超时
+    if(setsockopt(fd,SOL_SOCKET,SO_RCVTIMEO,(char   *)&TimeOut,sizeof(TimeOut))==SOCKET_ERROR)
+    {
+    return   -1;
     }
 //log_message("socket(id:%d) created  and binded : %s:%d ;",fd,inet_ntoa(addr.sin_addr),port);
 
@@ -94,6 +106,9 @@ evanet*  eva_net_init(int protocol,char* localip, unsigned short localport,
     {
         struct hostent *host;
         host = gethostbyname( remoteip );
+
+        if(host==NULL) return NULL;
+
         if( host )
         {
             ((net->remoteaddr)->sin_addr).s_addr = *(size_t*) host->h_addr_list[0];

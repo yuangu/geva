@@ -6,7 +6,7 @@
 //init a evabyte
 evabyte* initevabyte(evabyte* aevabyte,int maxlen){
 	//evabyte aevabyte;
-	aevabyte->data=(uchar*)malloc(maxlen);
+	aevabyte->data=(uchar*)malloc(maxlen*sizeof(uchar));
 	aevabyte->len=0;
 	memset(aevabyte->data,0,maxlen);
 	return aevabyte;
@@ -18,27 +18,25 @@ void freeevabyte(evabyte *aevabyte){
 //连接两个字节，返回inevabyte的指针
 evabyte* putevabyte(evabyte* inevabyte,const uchar* str,int len){
 	int  i;
+
 	for(i=0;i<len;i++)
 	{
-		*((inevabyte->data)+(inevabyte->len))=str[i];
+		*((inevabyte->data)+(inevabyte->len))=*(str+i);
 		inevabyte->len++;
 	}
 	return inevabyte;
 
 }
 evabyte* delevabyte(evabyte* inevabyte,int frist,int last){
-	if((inevabyte->len)==last) inevabyte->len=frist;
-       	else
-	{	int f=frist,l=last;
+		int f=frist,l=last;
 		inevabyte->len=0;
 		int i=0;
 		while(1){
-		    *(inevabyte->data+(i++))=*(inevabyte->data+(f++));
-            inevabyte->len++;
+		    *(inevabyte->data+i)=*(inevabyte->data+f);
+		    i++,f++;
+            inevabyte->len+=1;
             if(f==l)break;
 		}
-
-	}
 	return inevabyte;
 
 }

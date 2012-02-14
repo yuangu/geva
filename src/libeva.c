@@ -33,8 +33,16 @@ void eva_init(EVA *eva,ulong user,char* passwd,status sta){
 
     memcpy( (eva->user)->passwd_md5_one, md5_pass, 16 );
 
+    uchar md51passwithid[24];
+    memset(md51passwithid,0,24);
+    memcpy(md51passwithid, md5_pass, 16 );
+    int i;
+    for(i=0;i<4;i++){
+        *(md51passwithid+20+i)=*((eva->user)->id+i);
+    }
+
     md5_init( &mst );
-	md5_append( &mst, (md5_byte_t*)((eva->user)->passwd_md5_one),20);
+	md5_append( &mst, (md5_byte_t*)md51passwithid,24);
 	md5_finish( &mst, (md5_byte_t*)((eva->user)->passwd_md5_two) );
 
     //for status
@@ -42,25 +50,70 @@ void eva_init(EVA *eva,ulong user,char* passwd,status sta){
 }
 int eva_login(EVA* eva){
 
-    LONDATA* logindata=eva_login_init();
-    eva_login_touch_send(eva,logindata);
-    eva_login_touch_recv(eva,logindata);
-    eva_login_request_send(eva,logindata);
-    return 01;
+                LONDATA* logindata=eva_login_init();
+                int flag;
+
+
+                flag=eva_login_touch_send(eva,logindata);
+                  printf("%d",flag);
+                if(flag<=0)return flag;
+                flag=eva_login_touch_recv(eva,logindata);
+                if(flag<=0) return flag; //0x91
+                flag=eva_login_request_send(eva,logindata);
+                if(flag<=0) return flag;
+                flag=eva_login_request_recv(eva,logindata);
+                if(flag<=0) return flag;   //0xAB
+                flag=eva_login_verify_send(eva,logindata);
+                if(flag<=0)return flag;
+                flag=eva_login_verify_recv(eva,logindata);
+                if(flag<=0) return flag;  //0xdd
+                flag=eva_login_E5_send(eva,logindata);
+                if(flag<=0) return flag;
+
+                flag=eva_login_E5_recv(eva,logindata);
+                if(flag<=0) return flag; //E5
+                flag=eva_login_E3_send(eva,logindata);
+                if(flag<=0) return flag;
+
+                flag=eva_login_E3_recv(eva,logindata);
+                if(flag<=0)return flag;//E3
+                flag=eva_login_30_send(eva,logindata);
+                if(flag<=0) return flag;
+                flag=eva_login_30_recv(eva,logindata);
+
+                if(flag<=0) return flag;
+
+
+    printf("%d",flag);
+    free(logindata);
+    if(flag<=0) return flag;
+    else
+    return 1;
 }
 /*
 debug
 */
 
 int main(){
+//测试QQ号
+//帐号       - 密码
+//2386953608 - 0123456789
+//2421723768 - 0123456789
+//847708268  - testtest
+//1348186323 -012345678
 EVA eva;
-eva_init(&eva,822705688,"123456",1);
+eva_init(&eva,1348186323,"0123456789",EVA_ONLINE);
+//eva_init(&eva,847708268,"testtest",EVA_ONLINE);
+printf("开始了！");
 eva.net=eva_net_init(UDP,"0.0.0.0",4000,
-                      "sz3.tencent.com", 8000);
-                      printf("%d\n",(eva.net)->fd);
-if(eva.net==NULL)printf("出错了，net初使化！");
-eva_login(&eva);
+                      "183.60.48.32", 8000);
 
+if(eva.net==NULL)printf("出错了，net初使化！");
+else{
+int flag=eva_login(&eva);
+printf("%d",flag);
+if(flag<=0) printf("登录失败！");
+}
 return 1;
 }
 

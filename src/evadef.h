@@ -23,7 +23,7 @@ typedef unsigned long ulong;
 	EVA_BUSY = 0x32,
 	EVA_KILLME = 0x3C,
 	EVA_QUIET = 0x46,
-	EVA_HIDDEN = 0x28
+	EVA_HIDDEN = 0x28,
 };
 
 typedef enum EVASTATUS status;
@@ -36,7 +36,7 @@ typedef struct {
 //跟用户有关的内容
 typedef struct {
 	uchar id[4];
-	uchar passwd_md5_one[20];
+	uchar passwd_md5_one[16];
 	uchar passwd_md5_two[16];
 	uchar nickname[100];
     	status sta;
@@ -48,7 +48,6 @@ typedef struct {
 	uchar version[2];  //版本
 	uchar gd[11];    //固定的字节
 	uchar seq[2];   //包序
-
 } evadata;
 
 
