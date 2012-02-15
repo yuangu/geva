@@ -93,24 +93,21 @@ int eva_login(EVA* eva){
 /*
 debug
 */
-
-int main(){
 //测试QQ号
 //帐号       - 密码
 //2386953608 - 0123456789
 //2421723768 - 0123456789
 //847708268  - testtest
 //1348186323 -012345678
-EVA eva;
-eva_init(&eva,1348186323,"0123456789",EVA_ONLINE);
+int main(){
+EVA eva;    //申明一个EVA变量
+eva_init(&eva,1348186323,"0123456789",EVA_ONLINE);  //EVA初使化
 //eva_init(&eva,847708268,"testtest",EVA_ONLINE);
-printf("开始了！");
 eva.net=eva_net_init(UDP,"0.0.0.0",4000,
-                      "183.60.48.32", 8000);
-
+                      "183.60.48.32", 8000);  //网络初使化
 if(eva.net==NULL)printf("出错了，net初使化！");
 else{
-int flag=eva_login(&eva);
+int flag=eva_login(&eva);     //登录
 printf("%d",flag);
 if(flag<=0) printf("登录失败！");
 }

@@ -383,7 +383,7 @@ int eva_login_30_send(EVA *eva,LONDATA* logindata){
      decryptbyte.len+=35;  //35 of 00
      uchar fixdata[17]={0xC0,0x4B,0x26,0xBC,   0x20,0x79,0xDB,0xA2,
                         0x7B,0xEB,0x2F,0x0D,    0x12,0x0C,0xE9,0xEA,  //固定的填充
-                        0x96,//随机字节
+                        0x5A,//随机字节
      };
      putevabyte(&decryptbyte,fixdata,17);
      uchar EVAstauts[1];
@@ -395,7 +395,7 @@ int eva_login_30_send(EVA *eva,LONDATA* logindata){
      putevabyte(&decryptbyte,logindata->EVA_91_FIX_DATA01,6);
      decryptbyte.len+=16;
      putevabyte(&decryptbyte,logindata->EVA_LOGIN_BA_TOKEN,58);
-     uchar gdfix[37]={    0x00,0x00,0x00,0x08,    0x00,0x00,0x00,0x00,
+     uchar gdfix[37]={  0x00,0x00,0x00,0x08,    0x00,0x00,0x00,0x00,
                         0x08,0x04,0x10,0x00,    0x01,0x40,0x01,0x85,
                         0xB7,0x23,0x1A,0x00,    0x10,0xE4,0xF4,0x64,
                         0xF4,0xD7,0x2C,0x9E,    0xF1,0x85,0xFD,0x01,
@@ -406,8 +406,8 @@ int eva_login_30_send(EVA *eva,LONDATA* logindata){
     uchar gd_dd[7]={0x02, 0x20, 0x82, 0x45, 0x7D ,  //DD包固定填充
     00 ,0x10 }; //len of the dd key01
     putevabyte(&decryptbyte,gd_dd,7);
-    putevabyte(&decryptbyte,logindata->EVA_LOGIN_DD_TOKEN_key1,7);
-     decryptbyte.len+=235;
+    putevabyte(&decryptbyte,logindata->EVA_LOGIN_DD_TOKEN_key1,6);
+     decryptbyte.len+=251;   //原来是235
      int sendlen=eva_net_send(eva->net,pack2(&decryptbyte,&sendbyte,cmd,logindata->EVA_LOGIN_DD_TOKEN_key1,eva,logindata));
     if(sendlen<=0) return NET_ERRO;
     freeevabyte(&decryptbyte),freeevabyte(&sendbyte);
