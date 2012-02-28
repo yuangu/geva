@@ -8,17 +8,61 @@
 */
 #ifndef _LIB_EVA_H_
 #define _LIB_EVA_H_
+#include "login.h"
 #include "evadef.h"
 #include "evasocket.h"
-typedef struct{
-	evanet* net;
-	evauser* user;
-	evadata* data;
-} EVA;
+
+#include "package.h"
+#include <pthread.h>
+
+#ifdef __WIN32__
+#define Import   __declspec( dllimport )
+#define Export   __declspec( dllexport )
+#elif defined(__LCC__) && defined(__WIN32__) /* LCC-Win32 */
+#define Export __stdcall
+#else
+#define Import
+#define Export
+#endif
+
+/* APIENTRY */
+#if !defined(APIENTRY)
+#  if defined(__WIN32__)
+#    define APIENTRY __stdcall
+#  else
+#    define APIENTRY
+#  endif
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
 *@brief eva初使化
-*@param <*eva><一个EVA型指针><user><用户帐号><passwd><用户密码><sta><是否隐身，0表示是隐身，1表示不隐身>
+*@param <*eva><一个EVA型指针>  <user><用户帐号>  <passwd><用户密码><sta>  <见enum EVASTATUS(evadef.h)>
 *@retrun <void>
 */
-void eva_init(EVA *eva,ulong user,char* passwd,status sta);
+Export void  APIENTRY eva_init(EVA *eva);
+/**
+*@brief libeva版本获取
+*@retrun <C串>
+*/
+Export char* APIENTRY eva_get_version();
+/**
+*@brief eva登录
+*@retrun <登录错误，详情见enum LOGIN_ERRO（login.h）>
+*/
+Export int APIENTRY eva_login(EVA* eva,
+              const char* user_char,char* passwd,status sta,
+              char*  serverlist, int protocol
+             );
+/**
+@brief 登录后发送的第一个数据包
+*/
+int eva_ad_012c(EVA *eva);
+#ifdef __cplusplus
+}
+#endif
 #endif

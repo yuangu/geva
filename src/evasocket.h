@@ -4,23 +4,17 @@
 #include "evadef.h"
 #include<string.h>
 #include<sys/types.h>
-#include<unistd.h>
 #include <fcntl.h>
 #ifdef __WIN32__
 #include<winsock.h>
 #include <wininet.h>
 #else
+#include<unistd.h>
 #include<sys/socket.h>
 #include<netinet/in.h>
 #include<arpa/inet.h>
 #include <netdb.h>
 #endif
-
-typedef struct _eavnet_{
-    int fd;
-    int isudp;
-    struct sockaddr_in* remoteaddr;
-}evanet;
 
 evanet*  eva_net_init(int protocol,char* localip, unsigned short localport,
                       char* remoteip, unsigned short remoteport);

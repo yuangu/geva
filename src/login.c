@@ -61,6 +61,7 @@ evabyte* unpack(evabyte* in,evabyte *out,uchar* key){
        {
         printf("\n%X\n",*(in->data+4));
         printf("½âÃÜ´íÎó");
+        return NULL;
        }
     putevabyte(out,outstr,outlen);
 
@@ -102,6 +103,8 @@ int eva_login_touch_send(EVA *eva,LONDATA* logindata){
     decryptbyte.len=35;//the last of 15 is zero
    // printf("%d",decryptbyte.len);
     int sendlen=eva_net_send(eva->net,pack(&decryptbyte,&sendbyte,cmd,key,eva));
+
+
     if(sendlen<=0) return NET_ERRO;
     freeevabyte(&decryptbyte),freeevabyte(&sendbyte);
    // &decryptbyte=NULL;
@@ -262,7 +265,7 @@ int eva_login_verify_recv(EVA *eva,LONDATA* logindata){
     initevabyte(&encryptbyte,350);
     int recvlen=eva_net_recv(eva->net,&recvbyte);
      if(recvlen<=0) return NET_ERRO;
-    unpack(&recvbyte,&encryptbyte,logindata->EVA_LOGIN_DD_RECV_KEY);
+    if(unpack(&recvbyte,&encryptbyte,logindata->EVA_LOGIN_DD_RECV_KEY)==NULL) return NO_ERRO;
     if(*(encryptbyte.data+3)==0x33||*(encryptbyte.data+3)==0x51) return NO_ERRO;
     if(*(encryptbyte.data+3)==0xBF) return ID_ERRO;
     if(*(encryptbyte.data+3)==0x34) return PASSWD_ERRO;
@@ -350,7 +353,7 @@ int eva_login_E3_recv(EVA *eva,LONDATA* logindata){
     initevabyte(&recvbyte,100);
     initevabyte(&encryptbyte,100);
     int recvlen=eva_net_recv(eva->net,&recvbyte);
-     if(recvlen<=0) return NET_ERRO;
+    if(recvlen<=0) {printf("´íÎó");return NET_ERRO;}
     unpack(&recvbyte,&encryptbyte,logindata->EVA_LOGIN_E5_TOKEN_key2);
     int nick_len=*(encryptbyte.data+7);
     getucharfromevabyte(&encryptbyte,(eva->user)->nickname,8,8+nick_len);
