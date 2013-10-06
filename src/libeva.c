@@ -1,6 +1,7 @@
 #include"libeva.h"
 #include "login.h"
 #include "evacontrol.h"
+#include "evaad.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -189,15 +190,6 @@ Export int APIENTRY eva_login(EVA* eva,
     if(flag<=0) return flag;
     else
     {
-        //成功后才分配内存
-        eva->recvmessage=(evamessage*)malloc(sizeof(evamessage));
-        eva->sendmessage=(evamessage*)malloc(sizeof(evamessage));
-        memset(eva->recvmessage,0,sizeof(evamessage));
-        memset(eva->sendmessage,0,sizeof(evamessage));
-        (eva->recvmessage)->data=(evabyte*)malloc(sizeof(evabyte));
-        (eva->sendmessage)->data=(evabyte*)malloc(sizeof(evabyte));
-        initevabyte((eva->recvmessage)->data,1024);
-        initevabyte((eva->sendmessage)->data,1024);
 
         pthread_t* send=malloc(sizeof(pthread_t));
         pthread_t* recv=malloc(sizeof(pthread_t));
@@ -206,11 +198,15 @@ Export int APIENTRY eva_login(EVA* eva,
 
         pthread_create(send,NULL,(CALLFUNC)(&messagesend),(void*)eva);
         pthread_create(recv,NULL,(CALLFUNC)(&messagerecv),(void*)eva);
+
         pthread_detach( *send );
         pthread_detach( *recv );
 
         return 1;
     }
+}
+Export int APIENTRY eva_ad_012c(EVA *eva){
+return  eva_ad_012c_send(eva);
 }
 
 //debug

@@ -38,5 +38,7 @@ int main(int agrc,char *argv[]){
 	if(flag==PASSWD_ERRO)printf("passwd erro");
 	if(flag==ID_ERRO)printf("ID erro");
 	if(flag==NO_ERRO)printf("go to jihuo");
+	if(flag>0)  {eva_ad_012c(&eva); printf("run here");}
+	Sleep(2000);
 	return 1;
 }

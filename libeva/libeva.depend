@@ -1,0 +1,111 @@
+# depslib dependency file v1.0
+1330437454 source:d:\libeva\src\evaad.c
+	"libeva.h"
+	"evadef.h"
+	"evacontrol.h"
+	"evaad.h"
+
+1330437721 d:\libeva\src\libeva.h
+	"login.h"
+	"evadef.h"
+	"evasocket.h"
+	"package.h"
+	<pthread.h>
+
+1330437555 d:\libeva\src\evadef.h
+	<pthread.h>
+
+1330413815 d:\libeva\src\evasocket.h
+	"evadef.h"
+	<string.h>
+	<sys/types.h>
+	<fcntl.h>
+	<winsock.h>
+	<wininet.h>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netdb.h>
+
+1329004826 d:\libeva\src\package.h
+	"evadef.h"
+
+1330437348 d:\libeva\src\evacontrol.h
+	"libeva.h"
+
+1329650333 d:\libeva\src\evaad.h
+	"evadef.h"
+	"evacontrol.h"
+
+1330437602 source:d:\libeva\src\evacontrol.c
+	"evacontrol.h"
+	"evadef.h"
+	"package.h"
+	"evacrypt.h"
+	<string.h>
+	<stdio.h>
+	<windows.h>
+	<unistd.h>
+
+1329127409 d:\libeva\src\evacrypt.h
+
+1329142327 source:d:\libeva\src\evacrypt.c
+	"evacrypt.h"
+	<stdio.h>
+	<string.h>
+	<winsock.h>
+	<arpa/inet.h>
+
+1329144691 source:d:\libeva\src\evasocket.c
+	"evasocket.h"
+	<stdlib.h>
+	<stdio.h>
+
+1330414105 source:d:\libeva\src\login.c
+	"login.h"
+	"evasocket.h"
+	"package.h"
+	"evacrypt.h"
+	<stdio.h>
+
+1330413715 d:\libeva\src\login.h
+	"evadef.h"
+	"libeva.h"
+
+1252584026 source:d:\libeva\src\md5.c
+	"md5.h"
+	<string.h>
+	<string.h>
+	<math.h>
+
+1252584026 d:\libeva\src\md5.h
+
+1329544400 source:d:\libeva\src\package.c
+	"package.h"
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	"evacrypt.h"
+
+1329043091 source:d:\libeva\src\utf8.c
+	<windows.h>
+	<iconv.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"utf8.h"
+
+1252584026 d:\libeva\src\utf8.h
+
+1330432410 source:d:\libeva\src\libeva.c
+	"libeva.h"
+	"login.h"
+	"evacontrol.h"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<pthread.h>
+	<windows.h>
+	"md5.h"
+

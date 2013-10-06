@@ -1,0 +1,14 @@
+﻿生成启动时间为 2012-2-19 19:27:35。
+     1>项目“D:\libeva\libeva\libeva.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\libeva.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       GenerateTargetFrameworkMonikerAttribute:
+       正在跳过目标“GenerateTargetFrameworkMonikerAttribute”，因为所有输出文件相对于输入文件而言都是最新的。
+       ClCompile:
+         D:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\libeva.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TC /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt ..\src\evaad.c ..\src\evacontrol.c ..\src\evacrypt.c ..\src\evasocket.c ..\src\libeva.c ..\src\login.c ..\src\md5.c ..\src\package.c ..\src\utf8.c /clr:nostdlib 
+     1>cl : 命令行 error D8045: 不能使用 /clr 选项编译 C 文件“..\src\evaad.c”
+     1>已完成生成项目“D:\libeva\libeva\libeva.vcxproj”(build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:06.59

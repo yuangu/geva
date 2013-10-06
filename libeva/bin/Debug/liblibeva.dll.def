@@ -1,0 +1,5 @@
+EXPORTS
+    eva_ad_012c@4 @1
+    eva_get_version@0 @2
+    eva_init@4 @3
+    eva_login@24 @4

@@ -14,9 +14,17 @@ int eva_ad_012c_send(EVA *eva){
     0x84,0x4F,0x36,0x8D,0x92,0xEF,0x60,0x17,
     0x76,0x73,0x7A,0x47,0x8A,0xA2,0xF5,0xD8,
     };
-
-    pack_sessionkey(eva,cmd,dataone,64);
-
+    if(sendqueue.front==(sendqueue.rear+1)){
+    #ifdef __WIN32__
+    Sleep(1000);
+    #else
+    sleep(1);
+    #endif
+    }else{
+    pack_sessionkey(eva,sendqueue.elem+sendqueue.rear,cmd,dataone,64);
+    sendqueue.rear++;
+    if(sendqueue.rear==MAX_MESSAGE) sendqueue.rear-=MAX_MESSAGE;
+    }
     uchar datetwo[64]={
     0x02,0x02,0x03,0x3C,0x01,0x03,0x00,0x00,
     0x27,0x99,0xFE,0xED,0xDF,0xE9,0xF7,0xC4,
@@ -27,14 +35,20 @@ int eva_ad_012c_send(EVA *eva){
     0xA0,0xFF,0x07,0x5D,0x01,0x9B,0x8C,0x19,
     0x4A,0xE9,0x23,0xE5,0x91,0xE6,0x3E,0x80,
 };
-    pack_sessionkey(eva,cmd,datetwo,64);
-
+   // pack_sessionkey(eva,cmd,datetwo,64);
+if(sendqueue.front==(sendqueue.rear+1)){
+    #ifdef __WIN32__
+    Sleep(1000);
+    #else
+    sleep(1);
+    #endif
+    }else{
+    pack_sessionkey(eva,sendqueue.elem+sendqueue.rear,cmd,datetwo,64);
+    sendqueue.rear++;
+    if(sendqueue.rear==MAX_MESSAGE) sendqueue.rear-=MAX_MESSAGE;
+    }
 return 01;
 }
 int eva_ad_012c_recv(EVA *eva){
-    if(*((eva->recvmessage)->cmd)==0x01&&*((eva->recvmessage)->cmd+1)==0x2c){
-
-        (eva->recvmessage)->flag=1;
-    }
-    return 1;
+    return 01;
 }
